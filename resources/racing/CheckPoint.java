@@ -13,8 +13,6 @@ public class CheckPoint {
         y2 = 0;
     }
     
-    // it is checkLine in fact, it is horizontal or vertical and has two points
-                                // telling where the checkLine has start and end
     public CheckPoint(char direction, int a, int b, int c) {
         if (direction == 'x') {
             this.horizontal = true;
