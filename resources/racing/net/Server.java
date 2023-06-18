@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-//import racing.BonusPoint;
+
 
 import racing.PlayerMP;
 import racing.net.packets.*;
@@ -68,7 +68,7 @@ public class Server extends Thread {
                 if(isRaceStarted) {
                     if(connectedPlayers.isEmpty()) {
                         isRaceStarted = false;
-//                        restartGame();
+
                     }
                     else if(!allConfirmedStart) {
                         int i = 0;
@@ -89,7 +89,7 @@ public class Server extends Thread {
                 for(int i=0; i<raceTimes.size();i++) {
                     if(raceTimes.get(i) == 0.) break;
                     else if(i==raceTimes.size()-1) {
-                        // send message about end of the race with the results
+                        
                         ResultsPacket resultsPacket =
                                 new ResultsPacket(raceTimes, connectedPlayers);
                         this.sendDataToAllClients(resultsPacket.getData());
@@ -185,12 +185,10 @@ public class Server extends Thread {
                         new ConfirmLoginPacket();
                 sendData(confirmLoginPacket.getData(), player.ipAddress, player.port);
                 for (PlayerMP p : this.connectedPlayers) {
-                    // relay to the current connected player that there is a new
-                    // player
+                    
                     sendData(packet.getData(), p.ipAddress, p.port);
 
-                    // relay to the new player that the currently connected player
-                    // exists
+                    
                     LoginPacket tmpPacket = new LoginPacket(p.getUsername(), p.getX(), p.getY());
                     sendData(tmpPacket.getData(), player.ipAddress, player.port);
                 }
