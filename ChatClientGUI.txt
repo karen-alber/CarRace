@@ -1,0 +1,9 @@
+SERVER: user2 has joined the game.
+karen: hello
+user2: Hiiiiii
+karen: lets start
+user2: .....
+user2: congras
+karen: hardluck
+user2: byeeee
+karen: bye
