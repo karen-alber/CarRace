@@ -28,26 +28,26 @@ public class ChatClientGUI {
         this.socket = socket;
         this.username = username;
 
-        // Create a new JFrame for the chat client GUI
+        
         frame = new JFrame(username + " chat");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
         frame.setLocationRelativeTo(null);
 
-        // Create a new JTextArea for displaying the chat messages
+        
         chatArea = new JTextArea(10, 30);
         chatArea.setEditable(false);
         chatArea.setLineWrap(true);
         chatArea.setWrapStyleWord(true);
 
-        // Create a new JScrollPane for the chatArea JTextArea
+        
         JScrollPane scrollPane = new JScrollPane(chatArea);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        // Create a new JTextField for entering messages
+        
         messageField = new JTextField();
 
-        // Create a new JButton for sending messages
+        
         JButton sendButton = new JButton("Send");
         sendButton.addActionListener(new ActionListener() {
             @Override
@@ -59,8 +59,7 @@ public class ChatClientGUI {
             }
         });
 
-        // Add a KeyListener to the messageField to listen for the Enter key
-        // and send the message when it is pressed
+        
         messageField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -79,19 +78,19 @@ public class ChatClientGUI {
             public void keyReleased(KeyEvent e) {}
         });
 
-        // Create a new JPanel to hold the messageField and sendButton
+        
         JPanel inputPanel = new JPanel(new BorderLayout());
         inputPanel.add(messageField, BorderLayout.CENTER);
         inputPanel.add(sendButton, BorderLayout.EAST);
 
-        // Add the scrollPane and inputPanel to the frame's content pane
+        
         JPanel contentPane = new JPanel(new BorderLayout());
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         contentPane.add(scrollPane, BorderLayout.CENTER);
         contentPane.add(inputPanel, BorderLayout.SOUTH);
         frame.setContentPane(contentPane);
 
-        // Read the chat history from the file and display it in the chatArea
+        
         try {
             File file = new File("ChatClientGUI.txt");
             if (file.exists()) {
@@ -106,8 +105,7 @@ public class ChatClientGUI {
             ex.printStackTrace();
         }
 
-        // Register a PropertyChangeListener to listen for changes to the file
-        // and update the chatArea when a new message is added
+        
         try {
             RandomAccessFile raf = new RandomAccessFile("ChatClientGUI.txt", "r");
             final long[] filePointer = {raf.length()};
@@ -130,7 +128,7 @@ public class ChatClientGUI {
                 }
             };
 
-            // Create a new ActionListener that calls the propertyChange() method of the PropertyChangeListener
+            
             ActionListener al = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -138,16 +136,16 @@ public class ChatClientGUI {
                 }
             };
 
-            // Listen for changes to the file every 100ms
+            
             Timer timer = new Timer(100, al);
 
-            // Start the timer
+            
             timer.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // Show the frame
+        
         frame.setVisible(true);
     }
 }
