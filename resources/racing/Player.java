@@ -31,7 +31,7 @@ public class Player extends JComponent {
         this.lap = 1;
     }
     
-    // normalize angle to <0; 2pi>
+    
     public void normalize() {
         while (angle > 2*Math.PI) {
             angle -= 2*Math.PI;
@@ -52,7 +52,7 @@ public class Player extends JComponent {
             this.angle = angle;
     }
 	
-    // move car according to actual speed and angle
+    
     public void move() {
             double newX = x + Math.sin(angle) * speed;
             double newY = y - Math.cos(angle) * speed;
@@ -65,14 +65,11 @@ public class Player extends JComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
-        /*
-         *  Translate graphics to x, y
-         *  and rotate it through an angle
-         */
+        
         g2d.translate(x, y);
         g2d.rotate(angle);
 
-        // then, print avatar for the car
+        
         Image carAvatar = Toolkit.getDefaultToolkit().getImage(Player.class.
                 getResource("/images/buick_topDown.png"));
             g2d.drawImage(carAvatar, -25, -35, 50, 70, this);
@@ -94,20 +91,19 @@ public class Player extends JComponent {
         freezeTime = System.currentTimeMillis();
     }
     
-    // if specified time has passed after freeze() was called, return false
+    
     public boolean isFreezed() {
         return System.currentTimeMillis() - freezeTime <= FREEZE_TIME;
     }
     
-    // returns the absolute of speed or, if speed is 0, it returns 0.1
+    
     public double getPositiveSpeed() {
         if (speed == 0)
             return 0.1;
         return Math.abs(speed);
     }
     
-    // increase speed if it is not maximum
-    // set it null if you are breaking from driving backward
+    
     public void accelerate() {
         if (speed < 0) {
             speed = 0;
@@ -119,8 +115,7 @@ public class Player extends JComponent {
         }
     }
 
-    // decrease speed if it is not maximum backward
-    // more if you are breaking, less if you are driving backward
+    
     public void slowdown() {
         if (speed > 0)
             speed -= 0.5 / getPositiveSpeed();
@@ -132,7 +127,7 @@ public class Player extends JComponent {
         }
     }
 
-    // set speed higher if moving backward or lower if driving forward
+    
     public void toStop() {
         if(speed > 0) {
             speed -= 0.2 / getPositiveSpeed();
@@ -145,7 +140,7 @@ public class Player extends JComponent {
         }
     }
     
-    // slow the car immediately
+    
     public void notOnRoad() {
         if(speed > 0) {
             speed -= 0.5;
@@ -155,7 +150,7 @@ public class Player extends JComponent {
         }
     }
     
-    // set speed to zero
+    
     public void stop() {
         speed = 0;
     }
