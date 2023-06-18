@@ -71,7 +71,7 @@ public class Racing extends JPanel implements ActionListener {
     private long bestLap = 0;
     private boolean isRaceStarted;
     private boolean isRaceEnded;
-//    private String lastBonus;
+
 
     public Client socketClient;
     public Server socketServer;
@@ -118,7 +118,7 @@ public class Racing extends JPanel implements ActionListener {
                 }
             }).start();
         } else {
-            //nothing
+            
         }
         player = new PlayerMP(0, 0, 0, username.substring(0, username.length()>20?20:username.length()), null, -1);
         addPlayer(player);
@@ -140,7 +140,7 @@ public class Racing extends JPanel implements ActionListener {
         isRaceStarted = false;
         isRaceEnded = false;
 
-        //loadMap();
+        
         while(map == null) {
             SendMapPacket packet = new SendMapPacket(new File(""));
             packet.writeData(socketClient);
@@ -148,8 +148,6 @@ public class Racing extends JPanel implements ActionListener {
 
         registerSettings();
 
-
-        // set coordinates and angle from race settings
 
         registerKeyListener();
         timer = new Timer(15, this);
@@ -178,7 +176,7 @@ public class Racing extends JPanel implements ActionListener {
 
     private void registerKeyListener() {
         keys = new int[256];
-        Arrays.fill(keys, 0); // 0 = key is up
+        Arrays.fill(keys, 0); 
 
         KeyboardFocusManager kfm = KeyboardFocusManager
                 .getCurrentKeyboardFocusManager();
@@ -239,7 +237,7 @@ public class Racing extends JPanel implements ActionListener {
         }
     }
 
-    //to paint track, car, bonuses and text (lap, time, etc.)
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -339,7 +337,7 @@ public class Racing extends JPanel implements ActionListener {
             player.setSpeed(Player.MAX_BACKWARD_SPEED);
         }
 
-        // stops car when it is on side of screen.
+        
         int x = player.getX(), y = player.getY();
         if (x>screenSize.width-5) {
             player.setX(screenSize.width-5);
@@ -358,7 +356,7 @@ public class Racing extends JPanel implements ActionListener {
             player.stop();
         }
 
-        // check if car is on the road
+        
         Color color = getColorFromInt(track.getRGB(player.getX(), player.getY()));
         if (!color.equals(Color.BLACK) && !color.equals(Color.WHITE)) {
             // slowdown on not white and not black
@@ -374,7 +372,7 @@ public class Racing extends JPanel implements ActionListener {
         }
     }
 
-    // check if the car is not on the checkpoint or at the new lap
+    
     private void checkPoints() {
         if(checkpoints[actualCheckpoint].
                 ifGetsTheCheckpoint(player.getX(), player.getY())) {
@@ -488,7 +486,7 @@ public class Racing extends JPanel implements ActionListener {
                                     +"     "+String.format("%8s", packet.getRaceTime(i)),
                             20, 20*(i+2));
                 }
-//                    g.drawString("The Winner Is " + String.format("%20s", "username"),20,20);
+
             }
         };
         frame.add(panel);
@@ -541,7 +539,7 @@ public class Racing extends JPanel implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.setPreferredSize(new Dimension(1100, 805));
-//frame.setResizable(false);
+
 
         Racing race = new Racing();
 
@@ -559,7 +557,7 @@ public class Racing extends JPanel implements ActionListener {
         frame.setIconImage(icon);
         frame.setVisible(true);
 
-        // for disconnecting during closing the window
+       
         new WindowHandler(race, frame);
 
     }
