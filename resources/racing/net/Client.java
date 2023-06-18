@@ -6,7 +6,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-//import racing.BonusPoint;
 import racing.Player;
 import racing.PlayerMP;
 
